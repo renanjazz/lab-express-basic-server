@@ -17,21 +17,22 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json());
 app.use(morgan("dev"));
-
+const allProjects = require("./data/projects.json")
+const allArticles = require("./data/articles.json")
 // ROUTES
 // Start defining your routes here:
-app.get("/", function (req, res) {
+app.get("/",  (req, res) => {
   res.status(200).sendFile(__dirname + "/views/home.html");
 });
 app.get("/blog", function (req, res) {
   res.status(200).sendFile(__dirname + "/views/blog.html");
 });
 app.get("/api/projects", (req, res) => {
-  res.json(projects);
+  res.json(allProjects);
 });
 
 app.get("/api/articles", (req, res) => {
-  res.json(articles);
+  res.json(allArticles);
 });
 
 app.get("*", (req, res) => {
